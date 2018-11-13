@@ -1,7 +1,7 @@
 ### 181113(Tue)  
-p.21 - p.58  
+p.21 - p.82  
 chapter2.py : L1 - L67  
-chapter3.py : L1 - L92
+chapter3.py : L1 - L303
 ##### *Remember me*  
 numpy.sum(x) #各要素の総和  
 
