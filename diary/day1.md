@@ -16,7 +16,7 @@ type(x) #class 'numpy.ndarray'
 ブロードキャスト  
 スカラ値
 
-x = numpy.array([18, 25, 13])
+x = numpy.array([18, 25, 13])  
 x[np.array([0, 2])] #インデックス0, 2番目を取得  
 x > 15  
 -> array([True, True, False])  

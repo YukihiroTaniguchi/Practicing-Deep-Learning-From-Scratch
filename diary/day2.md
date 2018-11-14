@@ -26,7 +26,7 @@ numpy.ndim(x) #次元数
 
 行列の積  
 np.dot(A, B)  
--> Aの列数とBの列数を一致させる
+-> Aの列数とBの行数を一致させる
 
 出力層の活性化関数  
 回帰問題 : 恒等関数  
@@ -51,7 +51,7 @@ return y
 -> 数には有効桁数があり、大きすぎる値は表現できない
 
 
-ソフトマックス関数(ソフトマックス関数対策)  
+ソフトマックス関数(オーバーフロー対策)  
 def softmax(a):  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 c = np.max(a)  
@@ -73,7 +73,7 @@ return y
 numpy.argmax(y)  
 ->最も大きな要素のインデックスを取得
 
-Normalaize : 正規化  
+Normalize : 正規化  
 -> データをある決められた範囲に変換する処理
 
 前処理  
