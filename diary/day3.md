@@ -1,6 +1,6 @@
 ### 181114(Wed)  
-p.83 - p.96
-chapter4.py : L1 - L63
+p.83 - p.118
+chapter4.py : L1 - L286
 ##### *Remember me*  
 
 損失関数 #値が小さいほうが良い  
@@ -10,7 +10,7 @@ chapter4.py : L1 - L63
 
 交差エントロピー誤差  
 ```
-cross_entropy_error(x):  
+cross_entropy_error(y, t):  
 delta = 1e-7  
 return -numpy.sum(t * numpy.log(y + delta))
 ```
@@ -18,7 +18,7 @@ return -numpy.sum(t * numpy.log(y + delta))
 -> データの中から一部を選び出し、  
 その一部のデータを全体の「近似」として利用する
 
-0から60000未満の数字の中からランダムに10子の数字を選び出す  
+0から60000未満の数字の中からランダムに10個の数字を選び出す  
 ```
 numpy.random.choice(60000, 10)  
 -> array([38226, 20416,  9692, 16798, 40272, 29526,  3784, 12109, 52873,
@@ -31,7 +31,7 @@ x = x.reshape(1, x.size)
 
 交差エントロピー誤差(ミニバッチ対応 : one-hot)
 ```
-cross_entropy_error(x):  
+cross_entropy_error(y, t):  
     if y.ndim == 1 :  
         t = t.reshape(1, t.size)  
         y = y.reshape(1, y.size)  
@@ -42,7 +42,7 @@ cross_entropy_error(x):
 arangeについて
 ```
 batch_size = 5  
-numpy.arange(batch_size) #[0, 1, 2, 3 4]  
+numpy.arange(batch_size) #[0, 1, 2, 3, 4]  
 t -> [2, 7, 0, 9, 4]  
 y[numpy.arange(batch_size), t]  
 -> [y[0, 2], y[1, 7], y[2, 0], y[3, 9], y[4, 4]]  
@@ -51,7 +51,7 @@ y[numpy.arange(batch_size), t]
 
 ```
 交差エントロピー誤差(ミニバッチ対応 : !one-hot)  
-cross_entropy_error(x):  
+cross_entropy_error(y, t):  
     if y.ndim == 1 :  
         t = t.reshape(1, t.size)  
         y = y.reshape(1, y.size)  
@@ -102,4 +102,5 @@ def f(W):
 f = lambda w: net.loss(x, t)
 ```
 
-```np.random.rand(100, 784) #ガウス分布に従う乱数```
+ガウス分布(0.0以上、1.0未満)に従う乱数  
+```np.random.rand(100, 784) ```
