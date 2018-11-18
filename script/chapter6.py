@@ -134,6 +134,7 @@ for i in range(1000000000):
     x_batch = x_train[batch_mask]
     t_batch = t_train[batch_mask]
 
+
     grads = network.gradient(x_batch, t_batch)
     optimizer.update(network.params, grads)
 
@@ -145,4 +146,40 @@ for i in range(1000000000):
 
         epoch_cnt += 1
         if epoch_cnt >= max_epochs:
-            breakb
+            break
+
+#6.4.3 Dropout
+class Dropout:
+    def __init__(self, dropout_ratio=0.5):
+        self.dropout_ratio = dropout_ratio
+        self.mask = None
+
+    def forward(self, x, train_flg=True):
+        if train_flg:
+            self.mask = np.random.rand(*x.shape) > self.dorpout_raito
+            return x * self.mask
+        else:
+            return x * (1.0 - self.dorpout_raito)
+
+    def backward(self, dout):
+        return dout * self.mask
+
+#6.5.1 検証データ
+from others.util import shuffle_dataset
+(x_train, t_train), (x_test, t_test) = load_mnist()
+x_train, t_train = shuffle_dataset(x_train, t_train)
+
+validation_rate = 0.20
+validation_num = int(x_train.shape[0] * validation_rate)
+
+x_val = x_train[:validation_num]
+t_val = t_train[:validation_num]
+x_train = x_train[validation_num:]
+t_train  = t_train[validation_num:]
+
+#6.5.3 ハイパーパラメータ最適化の実装
+weight_decay = 10 ** np.random.uniform(-8, -4)
+print(weight_decay)
+
+lr = 10 ** np.random.uniform(-6, -2)
+print(lr)
